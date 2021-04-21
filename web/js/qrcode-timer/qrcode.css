@@ -1,0 +1,56 @@
+.status-icon__wrapper__icon {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.separatorGem {
+    position: relative;
+    height: 10px;
+    width: 10px;
+    left: 50%;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    transform: rotateZ(45deg);
+    margin-left: -5px;
+    top: -5px;
+    background: #329f80;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    margin-bottom: -10px;
+}
+
+.bp-view {
+    padding-top:1em;
+    padding-bottom:2em;
+    padding-left:30px;
+    padding-right:30px;
+    width:100%
+}
+.bp-view#invoicePaid {
+    padding-bottom:0
+}
+
+.bp-view#invoicePaid.pad{
+    padding-bottom:30px
+}
+
+.status-block{position:relative}
+.status-block>.success-block{position:relative;opacity:1}
+.inner-wrapper{position:relative;padding:1px}
+.status-icon__wrapper .inner-wrapper{position:relative;padding:1px}
+.status-icon__wrapper__outline{display:inline-block;align-items:center;justify-content:center;text-align:center;border-radius:50%;height:154px;width:154px;border:2px solid #13e5b6}
+.status-icon__wrapper__outline{animation:none !important}
+.status-icon__wrapper__icon{height:100%;width:100%;position:absolute;display:flex;align-items:center;justify-content:center}
+.status-icon__wrapper__outline_partial{display:flex;align-items:center;justify-content:center;text-align:center;border-radius:50%;height:154px;width:154px;border:2px solid #e51300}
+.status-icon__wrapper__outline_over{display:flex;align-items:center;justify-content:center;text-align:center;border-radius:50%;height:154px;width:154px;border:2px dashed #4618e9}
+
+#countdown-ticker {
+    position: absolute;
+    width: 175%;
+    margin-top: 14px;
+    color: white;
+    font-weight: bold;
+}

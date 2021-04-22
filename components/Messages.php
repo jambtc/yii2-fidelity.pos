@@ -102,7 +102,7 @@ class Messages extends Component
             $auth = array(
                 'VAPID' => array(
                     'subject' => $notification->description,
-                    'publicKey' => WebApp::decrypt($settings->public_key), // don't forget that your public key also lives in app.js
+                    'publicKey' => $settings->public_key, // don't forget that your public key also lives in app.js
                     'privateKey' => WebApp::decrypt($settings->secret_key), // in the real world, this would be in a secret file
                 ),
             );

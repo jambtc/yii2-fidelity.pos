@@ -13,6 +13,7 @@ use Yii;
 use yii\base\Component;
 use phpseclib\Net\SSH2;
 use app\components\WebApp;
+use app\components\Settings;
 use yii\web\NotFoundHttpException;
 
 class Seclib extends Component
@@ -23,8 +24,8 @@ class Seclib extends Component
             pclose(popen("start /B ". $cmd, "r"));
         } else {
             $ssh = new SSH2('localhost', 22);
-
-            if (!$ssh->login(Settings::host()->user, WebApp::decrypt(Settings::host()->password))) {
+            $host = Settings::host();
+            if (!$ssh->login($host->user, WebApp::decrypt($host->password))) {
                 throw new NotFoundHttpException(Yii::t('app', 'Login to localhost server failed.'));
             }
             $action = $cmd . " > /dev/null &";

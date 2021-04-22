@@ -17,6 +17,7 @@ use Yii;
  * @property string|null $country
  *
  * @property Users $user
+ * @property Stores[] $stores
  */
 class Merchants extends \yii\db\ActiveRecord
 {
@@ -69,6 +70,16 @@ class Merchants extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(Users::className(), ['id' => 'id_user']);
+    }
+
+    /**
+     * Gets query for [[Stores]].
+     *
+     * @return \yii\db\ActiveQuery|\app\models\query\StoresQuery
+     */
+    public function getStores()
+    {
+        return $this->hasMany(Stores::className(), ['id_merchant' => 'id']);
     }
 
     /**

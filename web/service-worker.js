@@ -161,8 +161,8 @@ self.addEventListener('fetch', function (event) {
 	if (getFileExtension(parser.pathname) == 'php')
 	{
 		console.log('[SW Parser] web no-cache',parser.pathname);
-		if (getFileExtension(parser.search) == '?r=wallet/index'){
-			console.log('[SW Parser] web no-cache & wallet/index non fa nulla...',parser.search);
+		if (getFileExtension(parser.search) == '?r=keypad/index'){
+			console.log('[SW Parser] web no-cache & keypad/index non fa nulla...',parser.search);
 			// event.respondWith(
 			// 	fetch(event.request)
 			// );

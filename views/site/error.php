@@ -17,16 +17,16 @@ $this->title = $name;
           <img src="css/images/logo.png" alt="" width="220">
         </div>
         <div class="form-divider"></div>
-        <h3><?= Html::encode($this->title) ?></h3>
+        <h3 class="alert-danger"><?= Html::encode($this->title) ?></h3>
 
         <div class="alert alert-danger">
             <?= nl2br(Html::encode($message)) ?>
         </div>
 
-        <p>
+        <p class="text-warning">
             The above error occurred while the Web server was processing your request.
         </p>
-        <p>
+        <p class="text-info">
             Please contact us if you think this is a server error. Thank you.
         </p>
     </div>

@@ -19,9 +19,13 @@ function isLocalhost($whitelist = ['127.0.0.1', '::1']) {
     return in_array($_SERVER['REMOTE_ADDR'], $whitelist);
 }
 
+$sin = '';
+if (isset($_COOKIE['sin']))
+    $sin = $_COOKIE['sin'];
+
 // impostazioni variabili globali per tutti i js
 $options = [
-    'userSin' => $_COOKIE['sin'],
+    'userSin' => $sin,
     // ...
 ];
 $this->registerJs(
@@ -66,8 +70,11 @@ SinAsset::register($this);
 
 
 <div class="wrapper">
-    <?php //echo $this->render('_sidebar'); ?>
-    <?php echo $this->render('_navbar'); ?>
+    <?php
+    if (!Yii::$app->user->isGuest) {
+        echo $this->render('_navbar');
+    }
+    ?>
     <div class="wrapper-inline">
         <?php $this->beginContent('@app/views/layouts/base.php') ?>
 

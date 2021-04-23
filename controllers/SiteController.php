@@ -55,6 +55,7 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+                'layout' => 'auth',
             ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',

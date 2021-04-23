@@ -48,6 +48,11 @@ class QrcodeController extends Controller
 		$this->layout='auth';
 
 		$invoice = Invoices::findOne(WebApp::decrypt($id));
+
+		if (null === $invoice)
+			return $this->redirect(['site/error']);
+
+
 		$pos = $invoice->pos;
 		$store = $pos->store;
 		$blockchain = $store->blockchain;

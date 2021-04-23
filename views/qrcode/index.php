@@ -89,8 +89,7 @@ if ($invoice->status == 'new'){
 }
 
 ?>
-
-<div class="row">
+<div class="row" style="justify-content: center;">
     <div class="col-sm-6">
         <div class="card text-center ">
             <div class="card-header pb-0 px-1">
@@ -240,9 +239,16 @@ if ($invoice->status == 'new'){
             <div class="card-footer">
                 <div class="form-group row">
                     <div class="col-lg-offset-1 col-lg-11">
-                        <a href="<?= Url::to(['keypad/index']) ?>">
-                        <?= Html::Button(Yii::t('app','Back to {pos}',['pos' => $pos->denomination]), ['class' => 'button circle block orange', 'name' => 'login-button']) ?>
-                        </a>
+                        <?php if (!Yii::$app->user->isGuest) : ?>
+                            <a href="<?= Url::to(['keypad/index']) ?>">
+                                <?= Html::Button(Yii::t('app','Back to {pos}',['pos' => $pos->denomination]), ['class' => 'button circle block orange', 'name' => 'login-button']) ?>
+                            </a>
+                        <?php else: ?>
+                            <a href="javascript: history.back();">
+                                <?= Html::Button(Yii::t('app','Go back'), ['class' => 'button circle block yellow', 'name' => 'back-button']) ?>
+                            </a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>

@@ -14,23 +14,25 @@ $deleting = <<<JS
 
     $(function(){
         // intercetta il pulsante Remove PIN e mostra la schermata di inserimento pin
-        var button = document.querySelector('.btn-delete');
-        button.addEventListener('click', function(){
-            if (confirm('{$deleteMessage}')) {
-                var keys = $('#notifications-form').yiiGridView('getSelectedRows');
-                console.log('[delete] valori selezionati:',keys);
-                $.ajax({
-                    url: '{$deleteUrl}',
-                    data: {
-                        keys: JSON.stringify(keys),
-                    },
-                    type: "POST",
-                    success: function(result) {
-                        // reload page from redirect
-                    }
-                });
-            }
-        });
+        if ($('.btn-delete').length){
+            var deleteNotificationButton = document.querySelector('.btn-delete');
+            deleteNotificationButton.addEventListener('click', function(){
+                if (confirm('{$deleteMessage}')) {
+                    var keys = $('#notifications-form').yiiGridView('getSelectedRows');
+                    console.log('[delete] valori selezionati:',keys);
+                    $.ajax({
+                        url: '{$deleteUrl}',
+                        data: {
+                            keys: JSON.stringify(keys),
+                        },
+                        type: "POST",
+                        success: function(result) {
+                            // reload page from redirect
+                        }
+                    });
+                }
+            });
+        }
     });
 JS;
 
@@ -45,7 +47,7 @@ $this->registerJs(
     <div class="dash-content relative">
 		<h3 class="w-text"><?= Yii::t('app','Notifications list');?></h3>
 	</div>
-    <p>
+    <p class="float-right">
         <?php
         if ($dataProvider->totalCount >0) { ?>
             <?= Html::button(Yii::t('app', 'Delete'), [

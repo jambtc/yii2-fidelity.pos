@@ -15,6 +15,7 @@ use yii\httpclient\Client;
 
 use app\models\Nodes;
 use app\models\Blockchains;
+use app\models\Notifications;
 
 
 class WebApp extends Component
@@ -378,7 +379,9 @@ class WebApp extends Component
 		return ($sent == 'sent' ? '<h5 class="text-warning">-' : '<h5 class="text-success">+') . $price . '</h5>';
 	}
 
-    public static function showMessagesRow($data){
+    public static function showMessagesRow($item){
+        $data = Notifications::findOne($item->id_notification);
+
         $dateLN = date("d M `y",$data->timestamp);
         $timeLN = date("H:i:s",$data->timestamp);
 
@@ -403,7 +406,7 @@ class WebApp extends Component
         $line = '
         <a href="'.Url::to(['messages/view', 'id' => self::encrypt($data->id)]).'" />
         <div class="container-fluid m-0 p-0">
-              <div class="row">
+              <div class="row ml-0">
                   <div class="col-12 m-0 p-0">
                       <div class="card shadow">
                           <div class="transaction-card-horizontal">

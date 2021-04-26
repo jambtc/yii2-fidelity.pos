@@ -179,6 +179,16 @@ class BackendController extends Controller
 
 
 			$parsedurl = parse_url($notify->url);
+			// echo "<pre>".print_r($parsedurl,true)."</pre>";exit;
+			if (isset($parsedurl['query'])){
+				$notificationUrl = $parsedurl['query'];
+			} else {
+				$notificationUrl = '';
+			}
+
+
+
+
 
 			$classUnread = '';
 			if ($item->alreadyread == 0) {
@@ -187,7 +197,7 @@ class BackendController extends Controller
 
 			$response['htmlContent'] .= '<li class='.$classUnread.'>
 			<a onclick="notify.openEnvelope('.$notify->id.');"
-				href="'.htmlentities('index.php?'.$parsedurl['query']).'"
+				href="'. htmlentities('index.php?'.$notificationUrl) .'"
 				id="news_'.$notify->id.'">
 	   			<div class="d-flex align-items-center justify-content-between">
 	                   <div class="d-flex align-items-center">
@@ -196,7 +206,6 @@ class BackendController extends Controller
 	                       </div>
 	                       <div class="ml-10">
 	                         <p class="coin-name">'.Yii::t('app',$notify->description).'</p>
-
 							 <div class="text-right">';
 							 // se il tipo notifica è help o contact ovviamente non mostro il prezzo della transazione
 							 if ($notify->type <> 'help'

@@ -4,8 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
-use app\models\Notifications;
-use app\models\query\NotificationsReadersQuery;
+use app\models\NotificationsReaders;
+use app\models\search\NotificationsReadersSearch;
+
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,13 +39,22 @@ class MessagesController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Notifications::find()
-                //->andWhere(['id_user' => Yii::$app->user->id])
-                //->orderBy(['id_notification' => SORT_DESC])
-        ]);
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => Notifications::find()
+        //         //->andWhere(['id_user' => Yii::$app->user->id])
+        //         //->orderBy(['id_notification' => SORT_DESC])
+        // ]);
+        //
+        // return $this->render('index', [
+        //     'dataProvider' => $dataProvider,
+        // ]);
+        $searchModel = new NotificationsReadersSearch();
+        // echo '<pre>'.print_r(Yii::$app->request->queryParams,true);exit;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -62,6 +72,24 @@ class MessagesController extends Controller
         ]);
     }
 
+    /**
+     * Deletes an existing Notifications model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete()
+    {
+        //echo '<pre>'.print_r($_POST,true);
+        $json = json_decode($_POST['keys']);
+
+        foreach ($json as $idx => $key)
+            $this->findModel($key)->delete();
+
+        return $this->redirect(['index']);
+    }
+
 
 
 
@@ -74,7 +102,7 @@ class MessagesController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Notifications::findOne($id)) !== null) {
+        if (($model = NotificationsReaders::findOne($id)) !== null) {
             return $model;
         }
 

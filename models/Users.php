@@ -33,7 +33,7 @@ class Users extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 1;
     const STATUS_BLOCKED = 2;
 
-    public $_sin;
+
 
 
     /**
@@ -199,19 +199,4 @@ class Users extends \yii\db\ActiveRecord
         $this->authKey = Yii::$app->security->generateRandomString();
     }
 
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validateSin($sin)
-    {
-        return $sin === $this->_sin;
-    }
-
-    public function setSin($in)
-    {
-        $this->_sin = $sin;
-    }
 }

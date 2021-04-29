@@ -29,7 +29,7 @@ use Yii;
  */
 class UserLogin extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    static $sin;
+    public static $sin;
 
     /**
      * {@inheritdoc}
@@ -165,6 +165,35 @@ class UserLogin extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
+
+
+    public function findBySin($sin)
+    {
+        $pos = Pos::findOne(['sin' => $sin]);
+        // user in questo caso deve essere caricato da userLogin che è
+        // l'identity interface 
+        $user = self::findOne($pos->merchant->user->id);
+        $user->sin = $pos->sin;
+
+        return $user;
+    }
+
+    public function setSin($sin)
+    {
+        $this->sin = $sin;
+    }
+
+    /**
+     * Validates inserted sin
+     *
+     * @param string $sin sin to validate
+     * @return bool if sin provided is valid for current user
+     */
+    public function validateInputSin($sin)
+    {
+        return $sin === $this->sin;
+    }
+
     /**
      * Validates user activation
      *
@@ -175,17 +204,5 @@ class UserLogin extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
         return $this->status_activation_code;
     }
 
-    public function findBySin($sin)
-    {
-        $pos = Pos::find(['sin' => $sin])->one();
-        $merchant = Merchants::findOne($pos->id_merchant);
 
-        self::$sin = $pos->sin;
-
-        return self::findOne($merchant->id_user);
-    }
-
-    public function validateSin($sin){
-        return $sin === self::$sin;
-    }
 }

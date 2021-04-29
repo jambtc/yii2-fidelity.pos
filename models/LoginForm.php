@@ -46,7 +46,10 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
 
-            if (!$user || !$user->validateSin($this->sin)) {
+            // echo "<pre>user...".print_r($this->sin,true)."</pre>";;exit;
+
+
+            if (!$user || !$user->validateInputSin($this->sin)) {
                 $this->addError($attribute, Yii::t('app','SIN Client ID is incorrect.'));
             } else if (!$user->validateStatus()) {
                 $this->addError($attribute, Yii::t('app','User not yet active.'));

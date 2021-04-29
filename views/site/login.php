@@ -13,6 +13,11 @@ app\assets\ServiceWorkerAsset::register($this);
 app\assets\SinAsset::register($this);
 
 $this->title = 'Login';
+
+if (isset($_GET['sin']))
+    $model->sin = $_GET['sin'];
+
+
 ?>
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">

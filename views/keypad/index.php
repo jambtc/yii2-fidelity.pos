@@ -12,7 +12,7 @@ app\assets\KeypadAsset::register($this);
 // echo '<pre>'.print_r(Yii::$app->user->identity,true);exit;
 
 $this->title = Yii::t('app', 'Keypad');
-$sin = $_COOKIE['sin'];
+$sin = isset($_COOKIE['sin']) ? $_COOKIE['sin'] : '';
 $pos = Pos::find(['sin' => $sin])->one();
 $store = $pos->store;
 $decimals = Settings::poa($store->id_blockchain)->decimals;

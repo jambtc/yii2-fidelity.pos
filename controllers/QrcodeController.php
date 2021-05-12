@@ -45,7 +45,7 @@ class QrcodeController extends Controller
 
 	public function actionView($id)
 	{
-		$this->layout='auth';
+		$this->layout='qrcode';
 
 		$invoice = Invoices::findOne(WebApp::decrypt($id));
 

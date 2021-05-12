@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 use app\components\WebApp;
@@ -35,7 +36,9 @@ $this->title = Yii::t('app','Transaction details') .' - '. $model->id;
                                   'format' => 'raw',
                                   'value' => function ($data) {
                                       $color = Rows::statuscolor($data->status);
-                                      $row = '<span class="badge badge-'.$color.'">'.$data->status.'</span>';
+                                      $tag = Html::a($data->status, Url::to(['/qrcode/view','id'=>WebApp::encrypt($data->id)]), ['target'=>'_self']);
+                                      $row = '<span class="btn btn-'.$color.'">'.$tag.'</span>';
+
                                       return $row;
                                   },
                               ],

@@ -40,14 +40,22 @@ ServiceWorkerAsset::register($this);
 
     <?php $this->head() ?>
 </head>
-<body class="dash-balance">
+<body>
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
-    <main class="margin mt-0">
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </main>
+    <?php
+    // mi serve per far caricare bootstrap4
+    NavBar::begin();
+    NavBar::end();
+    ?>
+    <div class="wrapper">
+        <main class="margin mt-0">
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </main>
+        
+    </div>
 
 </div>
 <?php $this->endBody() ?>

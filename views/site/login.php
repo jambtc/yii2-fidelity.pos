@@ -17,58 +17,66 @@ $this->title = 'Login';
 if (isset($_GET['sin']))
     $model->sin = $_GET['sin'];
 
-
 ?>
 <div class="container h-100">
-  <div class="row h-100 justify-content-center align-items-center">
+  <div class="h-100 justify-content-center align-items-center">
     <div class="site-login">
-      <div class="body-content dash-balance jumbotron pb-5">
-          <div class="login-logo text-left text-light" style="font-size: xx-large;">
-              <img src="css/images/logo.png" alt="" width="100">
-              <?= Yii::$app->name ?>
-          </div>
-          <div class="form-divider"></div>
-          <p class="text-light text-center"><?= Yii::t('app','Sign in to start your session') ?></p>
-        <div class="form-divider"></div>
-
-        <?php $form = ActiveForm::begin([
-            'id' => 'login-form',
-            'layout' => 'horizontal',
-            'fieldConfig' => [
-        		'template' => "{label}\n<div class=\"col-lg-12\">{input}</div>\n{error}\n<div class=\"col-lg-8\">{error}</div>",
-        		'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        	],
-        ]); ?>
-        <div class="txt-left">
-            <?= $form->errorSummary($model, ['id' => 'error-summary','class'=>'col-lg-12']) ?>
+      <div class="body-content ref-card c1 jumbotron pb-5">
+          <div class="text-center">
+            <a href="/">
+                <img src="css/images/logo.png" alt="" width="220">
+                <div class="form-divider"></div>
+                <h3  class="txt-white"><?php echo Yii::$app->id; ?></h3>
+                <div class="form-divider"></div>
+            </a>
+            <h5 class="txt-white">
+              <?= Yii::t('app','Sign in to start your session') ?>
+            </h5>
         </div>
 
-        <?php $fieldOptions1 = [
-            'inputTemplate' => '
-                                <div class="form-row-group with-icons">
-                                    <div class="form-row no-padding">
-                                        <i class="fa fa-lock"></i>
-                                        {input}
-                                    </div>
-                                </div>',
-            'inputOptions' => ['class' => ['widget' => 'form-element']]
-
-        ];
-          ?>
-
-        <?= $form->field($model, 'sin', $fieldOptions1)->textInput(['autofocus' => false, 'autocomplete'=>"off"]) ?>
-
-        <div class="form-group row">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton(Yii::t('app','Login'), [
-                    'class' => 'btn btn-primary',
-                    'name' => 'login-button',
-                    ]) ?>
+        <div class="form-divider"></div>
+        <div class="form-row">
+            <?php $form = ActiveForm::begin([
+                'id' => 'login-form',
+                'layout' => 'horizontal',
+                'fieldConfig' => [
+            		'template' => "{label}\n<div class=\"col-lg-12\">{input}</div>\n{error}\n<div class=\"col-lg-8\">{error}</div>",
+            		'labelOptions' => ['class' => 'col-lg-1 control-label'],
+            	],
+            ]); ?>
+            <div class="txt-left">
+                <?= $form->errorSummary($model, ['id' => 'error-summary','class'=>'col-lg-12']) ?>
             </div>
-        </div>
 
+            <?php $fieldOptions1 = [
+                'inputTemplate' => '
+                                    <div class="form-row-group with-icons">
+                                        <div class="form-row no-padding">
+                                            <i class="fa fa-lock"></i>
+                                            {input}
+                                        </div>
+                                    </div>',
+                'inputOptions' => ['class' => ['widget' => 'form-element']]
+
+            ];
+              ?>
+
+            <?= $form->field($model, 'sin', $fieldOptions1)->textInput(['autofocus' => false, 'autocomplete'=>"off"]) ?>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <?= Html::submitButton(Yii::t('app','Login'), [
+                        'class' => 'btn btn-primary btn-block',
+                        'name' => 'login-button',
+                        ]) ?>
+                </div>
+            </div>
+
+            <div class="form-divider"></div>
+            <?php ActiveForm::end(); ?>
+        </div>
         <div class="form-divider"></div>
-        <?php ActiveForm::end(); ?>
+        <div class="form-divider"></div>
       </div>
     </div>
   </div>

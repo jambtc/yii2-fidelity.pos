@@ -14,10 +14,10 @@ $qrCodeMessage = $invoice->to_address
                 ."&message=" . Html::encode($invoice->message);
 
 $qrCode = (new QrCode($qrCodeMessage))
-    ->setSize(200)
+    ->setSize(600)
     ->setMargin(5)
     // ->useForegroundColor(51, 153, 255);
-    ->useForegroundColor(11, 21, 31);
+    ->useForegroundColor(11, 11, 11);
 
 
 ClipboardCopyAsset::register($this);
@@ -90,7 +90,7 @@ if ($invoice->status == 'new'){
 
 ?>
 <div class="row" style="justify-content: center;">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="card text-center ">
             <div class="card-header pb-0 px-1">
                 <div class="login-logo text-left" style="font-size: large;">
@@ -145,7 +145,7 @@ if ($invoice->status == 'new'){
                             <small class="d-block mb-0 txt-green">
                                 <i class="txt-green fa fa-star mr-10 mb-5"></i><?= Yii::t('app','Amount') ?>
                             </small>
-                            <p class="text-muted d-block"><?= $invoice->price ?></p>
+                            <span class="text-muted d-block"><?= $invoice->price ?></span>
                         </div>
                     </div>
                 </div>
@@ -163,10 +163,12 @@ if ($invoice->status == 'new'){
 						</div>
 
                         <div class="tab-content">
-                            <div class="content-item active" id="contentScan">
-                                <?php echo '<img class="card-img-top" src="' . $qrCode->writeDataUri() . '">'; ?>
+                            <div class="text-center" >
+                                <div class="content-item active" id="contentScan" >
+                                    <?php echo '<img style="max-width:300px;" class="rounded mx-auto mt-4 d-block" src="' . $qrCode->writeDataUri() . '">'; ?>
+                                </div>
                             </div>
-                            <div class="content-item" id="contentCopy">
+                            <div class="content-item mt-4" id="contentCopy">
                                 <p class="alert alert-info">
                                     <?= Yii::t('app','To complete payment, please send the correct amount to the address below.') ?>
                                 </p>
@@ -174,10 +176,11 @@ if ($invoice->status == 'new'){
 
                                 <nav class="copyBox">
                                     <div class="alert alert-info">
-                                        <p class="lead"><?= Yii::t('app','Amount') ?></p>
-                                        <div class="">
-                                            <?= $invoice->price ?>
-                                        </div>
+                                        <p class="lead"><?= Yii::t('app','Amount') ?>: 
+                                            <span class="h3">
+                                                <?= $invoice->price ?>
+                                            </span>
+                                        </p>
                                     </div>
                                     <div class="separatorGem my-3"></div>
                                     <?= Yii::t('app','Click on address to copy in the clipboard') ?>
@@ -238,7 +241,7 @@ if ($invoice->status == 'new'){
             </div>
             <div class="card-footer">
                 <div class="form-group row">
-                    <div class="col-lg-offset-1 col-lg-11">
+                    <div class="col-lg-offset-1 col-lg-12">
                         <?php if (!Yii::$app->user->isGuest) : ?>
                             <a href="<?= Url::to(['keypad/index']) ?>">
                                 <?= Html::Button(Yii::t('app','Back to {pos}',['pos' => $pos->denomination]), ['class' => 'button circle block orange', 'name' => 'login-button']) ?>

@@ -75,7 +75,7 @@ SinAsset::register($this);
         echo $this->render('_navbar');
     }
     ?>
-    <div class="wrapper-inline">
+    <div class="wrapper">
         <?php $this->beginContent('@app/views/layouts/base.php') ?>
 
         <?php echo $this->render('_searchform'); ?>

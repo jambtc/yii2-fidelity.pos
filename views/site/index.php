@@ -7,7 +7,7 @@ $this->title = Yii::$app->id;
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="site-login">
-      <div class="body-content dash-balance jumbotron  text-center pb-5">
+      <div class="body-content ref-card c1 jumbotron  text-center pb-5">
         <img src="css/images/logo.png" alt="" width="220">
         <div class="form-divider"></div>
         <h3  class="txt-white"><?php echo Yii::$app->id; ?></h3>
@@ -20,7 +20,7 @@ $this->title = Yii::$app->id;
         <div class="form-divider"></div>
 
           <div class="form-row">
-            <a href="<?php echo Url::to(['site/login']); ?>" class="button circle block orange">Login</a>
+            <a href="<?php echo Url::to(['site/login']); ?>" class="button circle block orange"><?= Yii::t('app','Start') ?></a>
           </div>
           <div class="form-divider"></div>
           <div class="form-divider"></div>

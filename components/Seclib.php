@@ -23,13 +23,20 @@ class Seclib extends Component
         if (substr(php_uname(), 0, 7) == "Windows"){
             pclose(popen("start /B ". $cmd, "r"));
         } else {
-            $ssh = new SSH2('localhost', 22);
             $host = Settings::host();
-            if (!$ssh->login($host->user, WebApp::decrypt($host->password))) {
-                throw new NotFoundHttpException(Yii::t('app', 'Login to localhost server failed.'));
+
+            $address = $host->tcpip;
+            $user = $host->user;
+            $password = WebApp::decrypt($host->password);
+
+            $ssh = new SSH2($address, 22);
+            if (!$ssh->login($user, $password)) {
+                // throw new NotFoundHttpException(Yii::t('app', 'Login to localhost server failed.'));
+                return false;
             }
             $action = $cmd . " > /dev/null &";
             $ssh->exec($action);
         }
+        return true;
     }
 }

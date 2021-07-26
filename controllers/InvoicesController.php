@@ -115,7 +115,10 @@ class InvoicesController extends Controller
 
             //eseguo lo script che si occuperà in background di verificare lo stato dell'invoice appena creata...
 			$cmd = Yii::$app->basePath.DIRECTORY_SEPARATOR.'yii receive '.WebApp::encrypt($model->id);
-			Seclib::execInBackground($cmd);
+			if (!Seclib::execInBackground($cmd)){
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ['error'=>Yii::t('app','Error while connecting to SSH Server!')];
+            }
 
             return $this->redirect(['/qrcode/view', 'id' => WebApp::encrypt($model->id)]);
         } else {

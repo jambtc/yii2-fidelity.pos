@@ -21,7 +21,11 @@ class Seclib extends Component
     public function execInBackground($cmd)
     {
         if (substr(php_uname(), 0, 7) == "Windows"){
-            pclose(popen("start /B ". $cmd, "r"));
+            $handle = popen("start /B ". $cmd, "r");
+            if ($handle === false) {
+                return false;
+            }
+            pclose($handle);
         } else {
             $host = Settings::host();
 
@@ -31,7 +35,6 @@ class Seclib extends Component
 
             $ssh = new SSH2($address, 22);
             if (!$ssh->login($user, $password)) {
-                // throw new NotFoundHttpException(Yii::t('app', 'Login to localhost server failed.'));
                 return false;
             }
             $action = $cmd . " > /dev/null &";

@@ -52,6 +52,7 @@ function show_keypad() {
             </div>
         </div>
     `;
+    $('.token-balance').html(yiiOptions.balance)
     $('.keypad-get').append(keypad);
 }
 

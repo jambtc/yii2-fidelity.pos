@@ -1,6 +1,6 @@
 function invoiceUpdate(e, totalSeconds) {
     prc = calcolaPerc(e.offset.totalSeconds,totalSeconds);
-    console.log('[countdown bar prc]',prc);
+    // console.log('[countdown bar prc]',prc);
 
     checkInvoiceStatus();
 
@@ -44,7 +44,7 @@ function checkInvoiceStatus(){
         },
         dataType: "json",
         success:function(data){
-            console.log('[countdown checkinvoice]',data.status);
+            // console.log('[countdown checkinvoice]',data.status);
 
             switch (data.status){
                 case 'expired':

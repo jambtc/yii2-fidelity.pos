@@ -115,7 +115,7 @@ class ReceiveController extends Controller
 			}
 			if ($ipnflag){ //send ipn in case flag is true: può venire
 				if ($invoice->save()){
-					$this->log("Invoice n. $id SALVATA. Importo: $transactionValue");
+					$this->log("Invoice n. $id PAGATA.<br>Importo:$invoice->price<br>Pagato: $transactionValue<br>Hash: $invoice->txhash");
 				}else{
 					$this->log("Error : Cannot save invoice #. $id, Status: $invoice->status.");
 				}
@@ -124,7 +124,9 @@ class ReceiveController extends Controller
 			}
 
 			//conto alla rovescia fino alla scadenza dell'invoice
-			$this->log("Invoice: $id, Amount: ".$invoice->price.", Block: $block->number, Seconds: ".($invoice->expiration_timestamp-time())."\n");
+			if (isset($block)){
+				$this->log("Invoice: $id<br>Amount: ".$invoice->price."<br>Block: $block->number<br>Seconds: ".($invoice->expiration_timestamp-time()));
+			}
 		}
 	}
 

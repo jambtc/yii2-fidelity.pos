@@ -24,6 +24,10 @@ class KeypadController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/index']);
+        }
+
         $sin = !isset($_COOKIE['sin']) ? '' : $_COOKIE['sin'];
         $pos = Pos::find(['sin' => $sin])->one();
 

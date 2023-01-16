@@ -169,13 +169,19 @@ class UserLogin extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfa
 
     public function findBySin($sin)
     {
-        $pos = Pos::findOne(['sin' => $sin]);
+        
+        $pos = Pos::find()->andWhere(['sin' => $sin])->one();
+        
+        // echo '<pre>'.print_r($pos, true).'</pre>';exit;
         // user in questo caso deve essere caricato da userLogin che è
         // l'identity interface 
-        $user = self::findOne($pos->merchant->user->id);
-        $user->sin = $pos->sin;
-
-        return $user;
+        if (null !== $pos){
+            $user = self::findOne($pos->merchant->user->id);
+            $user->sin = $pos->sin;
+    
+            return $user;
+        }
+        return false;
     }
 
     public function setSin($sin)

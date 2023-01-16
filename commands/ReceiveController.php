@@ -127,6 +127,8 @@ class ReceiveController extends Controller
 			if (isset($block)){
 				$this->log("Invoice: $id<br>Amount: ".$invoice->price."<br>Block: $block->number<br>Seconds: ".($invoice->expiration_timestamp-time()));
 			}
+
+			sleep(1);
 		}
 	}
 
